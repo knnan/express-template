@@ -1,0 +1,46 @@
+#!/bin/bash
+
+# Bash sets the BASH environment variable, so if it is not set, then we
+# are running in a different shell, so manually run ourselves in BASH.
+if [ -z "${BASH:-}" ]; then
+	exec bash "$0" "$@"
+fi
+
+. "$(dirname "$0")/helpers.sh"
+
+function print_commit_msg_example() {
+	# shellcheck disable=2140 # irrelevant because quotes are present in multiline message
+	echo "
+		*********************************COMMIT MESSAGE FORMAT****************************************************
+		type(scope): subject must be at most 150 characters long in imperative sentence
+
+		body can be multiline,but each line has a max character limit of 150 characters.
+		Do not reference any task id in body.
+		Use the imperative, present tense: "change" not "changed" nor "changes"
+		There must be a blank line before and after the body.
+
+		The footer is optional, mainly meant for additional notes. It can  be multiline, but each line has a max character limit of 150 characters.
+ 		The footer should contain any information about Breaking Changes and is also the place to reference Issues that this commit refers to.
+		Footer can also be use to specify "BREAKING CHANGES" notes.There must be a blank line before and after footer.
+
+		TASK-ID:ID-5544
+
+		**********************************************************************************************************
+		Notes:
+		* The subject cannot end with a full stop and the statement must be in imperative.
+		* If TASK-ID belongs to a subtask: TASK-ID:PARENT-ID/SUBTASK-ID ex TASK-ID=ID-5356/ID-5432) but
+		 the branch name should always contain one task id that is the subtask-id if the task is a sub task type.
+		* The scope,footer is optional.
+		* The type,scope and subject together are referered as header.
+
+
+
+	"
+	exit 1
+}
+
+# HUSKY_GIT_PARAMS is removed in version 5.
+# Instead Git parameters should be used directly in scripts (e.g. $1)
+printf "\nValidating commit message\n"
+# npx commitlint --strict --config .commitlintrc.js --edit "$1" || print_commit_msg_example
+# validate_commit_msg_task_id "$1" || exit 1

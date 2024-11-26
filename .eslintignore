@@ -1,0 +1,6 @@
+node_modules/
+.commitlintrc.js
+.lintstagedrc.js
+ecosystem.config.cjs
+playground.js
+prototyping.js

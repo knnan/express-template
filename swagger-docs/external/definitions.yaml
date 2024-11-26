@@ -1,0 +1,65 @@
+tags:
+  - name: sample
+    description: sample api's
+  - name: fileservice
+    description: file service api's
+  - name: ocr
+    description: ocr api's
+  - name: visual
+    description: visual api's
+  - name: automation.xctest
+    description: xctest api's
+  - name: generic
+    description: generic api's
+  - name: networkshaping
+    description: networkshaping api's
+
+components:
+  securitySchemes:
+    cookieAuth:
+      type: apiKey
+      in: cookie
+      required: true
+      name: SOMENAME # session key
+    tokenAuth:
+      type: apiKey
+      in: header
+      required: true
+      name: token
+
+  schemas:
+    successResponseTemplate:
+      type: object
+      properties:
+        requestId:
+          type: string
+          format: uuid
+          example: "d5e8fe6c-55aa-4898-8224-c92d82fe3e4a"
+        statusCode:
+          type: integer
+          format: int32
+          example: 200
+        message:
+          type: string
+          example: operation was successful
+        status:
+          type: string
+          example: success
+    failureResponseTemplate:
+      type: object
+      properties:
+        requestId:
+          type: string
+          format: uuid
+          example: "d5e8fe6c-55aa-4898-8224-c92d82fe3e4a"
+        statusCode:
+          type: integer
+          format: int32
+          example: 400
+        message:
+          type: string
+          example: operation was unsuccessful
+        status:
+          type: string
+          example: error
+# https://roger13.github.io/SwagDefGen/

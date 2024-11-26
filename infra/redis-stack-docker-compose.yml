@@ -1,0 +1,10 @@
+services:
+  redis:
+    image: redis/redis-stack-server:latest
+    environment:
+      - REDIS_ARGS=--save 60 1 --requirepass yourpassword --loglevel warning --stop-writes-on-bgsave-error no
+    ports:
+      - "6379:6379"
+    volumes:
+      - ./data:/data
+    restart: always

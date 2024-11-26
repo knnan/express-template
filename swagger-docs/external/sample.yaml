@@ -1,0 +1,74 @@
+paths:
+  /sample-route/users:
+    get:
+      tags:
+        - sample
+      summary: get all users
+      security:
+        - tokenAuth: []
+        - cookieAuth: []
+      responses:
+        200:
+          description: Successful Operation
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: "#/components/schemas/successResponseTemplate"
+                  - type: object
+                    properties:
+                      data:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            id:
+                              type: number
+                              example: 3
+                            created_at:
+                              type: string
+                              example: 2022-05-27T04:16:56.000Z
+                            name:
+                              type: string
+                              example: knnan
+
+  /sample-route/users/{username}:
+    get:
+      tags:
+        - sample
+      summary: get all users
+      security:
+        - tokenAuth: []
+        - cookieAuth: []
+      parameters:
+        - in: path
+          name: username
+          description: username of the user whose details must be retrieved
+          required: true
+          schema:
+            type: string
+            example: knnan
+      responses:
+        200:
+          description: Successful Operation
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: "#/components/schemas/successResponseTemplate"
+                  - type: object
+                    properties:
+                      data:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            id:
+                              type: number
+                              example: 3
+                            created_at:
+                              type: string
+                              example: 2022-05-27T04:16:56.000Z
+                            name:
+                              type: string
+                              example: knnan
